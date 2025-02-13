@@ -13,13 +13,14 @@ class AWSDBConnector:
 
     def create_db_connector(self):
         creds = self.read_db_creds()
-        db_url = "postgresql://{user}:{password}@{host}:{port}/{database}".format(
+        db_url = "mysql+pymysql://{user}:{password}@{host}:{port}/{database}?charset=utf8mb4".format(
             user=creds['USER'],
             password=creds['PASSWORD'],
             host=creds['HOST'],
             port=creds['PORT'],
             database=creds['DATABASE']
         )
+
         engine = sa.create_engine(db_url)
         return engine
 
